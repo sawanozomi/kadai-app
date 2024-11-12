@@ -158,6 +158,7 @@ class PostController extends Controller
 
         // データ登録
         $post->is_deleted = true;
+
         $post->save();
 
         return redirect('/');
