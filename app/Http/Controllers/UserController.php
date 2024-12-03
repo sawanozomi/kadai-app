@@ -21,7 +21,7 @@ class UserController extends Controller
         }
 
         // 指定したIDのユーザー情報を取得する
-        $user = User::find(3);
+        $user = User::find($id);
 
         // ユーザーが存在するか判定
         if ($user == null) {
@@ -105,7 +105,7 @@ class UserController extends Controller
         $user->save();
 
         // 画面表示
-        return redirect('/user/' . $user->id);
+        return redirect('user' . $user->id);
     }
 
 

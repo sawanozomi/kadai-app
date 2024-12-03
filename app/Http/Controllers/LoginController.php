@@ -43,8 +43,9 @@ class LoginController extends Controller
     /**
      * ログアウト処理
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        return redirect('/login');
+        Session::forget('user');
+        return redirect('login');
     }
 }
