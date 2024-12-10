@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller,
     Session;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -123,6 +124,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //TODO 登録処理
+
+        $rules = [
+            'user_name' => 'required|min:8',
+        ];
+
+        $messages = ['required' => '', '' => ''];
+
+        Validator::make($request->all(), $rules, $messages)->validate();
+
+        $user = new User;
+
+        $user->name = $request->input('user_name');
+
+        $user->save();
 
         return redirect('/');
     }
