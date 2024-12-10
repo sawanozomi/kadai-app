@@ -83,7 +83,7 @@ class PostController extends Controller
         }
 
         // 画面表示
-        return view('post.detail', compact('post', 'user', 'isOwnPost'));
+        return view('post.detail', compact('post', 'user', 'isOwnPost', 'loginUser'));
     }
 
     /**
@@ -130,6 +130,7 @@ class PostController extends Controller
         if (!Session::exists('user')) {
             return redirect('/');
         }
+
 
         // データ登録
         $post->content = $request->postContent;
