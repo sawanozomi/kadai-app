@@ -126,17 +126,25 @@ class UserController extends Controller
         //TODO 登録処理
 
         $rules = [
-            'user_name' => 'required|min:8',
+            'name' => 'required|string|max:20',
+            'email' => 'required|email:rfc,dns,filter|exists:user,mail',
+            'password' => 'required|min:8',
         ];
 
-        $messages = ['required' => '', '' => ''];
+        $messages = [
+            'email.required' => '必須項目です',
+            'email.email' => '半角英数、記号のみで入力してください',
+            'password.required' => '8文字以上の半角英数、記号のみで入力してください',
+        ];
 
-        Validator::make($request->all(), $rules, $messages)->validate();
+        Validator::make($request->all(), $rules, $messages);
 
         $user = new User;
-
-        $user->name = $request->input('user_name');
-
+        $user->id = $request->id;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->biography = $request->biography;
+        $user->password = $request->password;
         $user->save();
 
         return redirect('/');
