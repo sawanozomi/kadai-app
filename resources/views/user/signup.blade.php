@@ -16,12 +16,16 @@
     <div class="page signup-page">
         <form class="form" action="/signup" method="post">
             @csrf
+            <div class="form-item newname">
+                <label for="name">名前</label>
+                <input type="text" id="name" name="name" />
+            </div>
             <div class="form-item newemail">
-                <label for="email">Email</label>
+                <label for="email">Eメール</label>
                 <input type="text" id="email" name="email" />
             </div>
             <div class="form-item newpassword">
-                <label for="password">Password</label>
+                <label for="password">パスワード</label>
                 <input type="password" id="password" name="password" />
             </div>
 
@@ -29,6 +33,27 @@
                 <button class="button-white" type="submit">新規登録</button>
             </div>
         </form>
+        @error('name')
+        <div class="mt-3">
+            <p class="text-red-500">
+                {{ $message }}
+            </p>
+        </div>
+        @enderror
+        @error('email')
+        <div class="mt-3">
+            <p class="text-red-500">
+                {{ $message }}
+            </p>
+        </div>
+        @enderror
+        @error('password')
+        <div class="mt-3">
+            <p class="text-red-500">
+                {{ $message }}
+            </p>
+        </div>
+        @enderror
     </div>
 </body>
 
@@ -36,7 +61,8 @@
 <style scoped>
     .signup-page {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
 
     .signup-page .title {
@@ -70,6 +96,11 @@
         width: 50%;
         height: 30px;
         font-size: 18px;
+    }
+
+    .container {
+
+        flex-direction: column;
     }
 </style>
 

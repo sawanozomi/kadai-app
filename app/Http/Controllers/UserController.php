@@ -132,12 +132,15 @@ class UserController extends Controller
         ];
 
         $messages = [
+            'name.required' => '必須項目です',
+            'name.max' => '20文字以下にしてください',
             'email.required' => '必須項目です',
-            'email.email' => '半角英数、記号のみで入力してください',
-            'password.required' => '8文字以上の半角英数、記号のみで入力してください',
+            'email.email' => '半角英数、記号のみの●●●@×××の形式で入力してください',
+            'password.required' => '必須項目です',
+            'password.min' => '8文字以上の半角英数、記号のみで入力してください',
         ];
 
-        Validator::make($request->all(), $rules, $messages);
+        Validator::make($request->all(), $rules, $messages)->validate();
 
         $user = new User;
         $user->id = $request->id;
@@ -147,6 +150,7 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->save();
 
+        Session::put('user', $user);
         return redirect('/');
     }
 }
