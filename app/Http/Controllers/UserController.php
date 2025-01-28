@@ -127,7 +127,7 @@ class UserController extends Controller
 
         $rules = [
             'name' => 'required|string|max:20',
-            'email' => 'required|email:rfc,dns,filter|exists:user,mail',
+            'email' => 'required|email:rfc,dns,filter|unique:users,email',
             'password' => 'required|min:8',
         ];
 
@@ -136,11 +136,12 @@ class UserController extends Controller
             'name.max' => '20文字以下にしてください',
             'email.required' => '必須項目です',
             'email.email' => '半角英数、記号のみの●●●@×××の形式で入力してください',
+            'email.unique' => 'このメールアドレスは既に登録されています',
             'password.required' => '必須項目です',
             'password.min' => '8文字以上の半角英数、記号のみで入力してください',
         ];
 
-        Validator::make($request->all(), $rules, $messages)->validate();
+       Validator::make($request->all(), $rules, $messages)->validate();
 
         $user = new User;
         $user->id = $request->id;
