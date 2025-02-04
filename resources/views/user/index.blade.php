@@ -29,12 +29,12 @@
                                 @csrf @method('PUT') @if ($isFollowed)
                                 <input type="hidden" name="isFollow" value="0" />
                                 <button class="button-white" onClick="unfollow()">
-                                        フォロー済み
-                                    </button> @else
+                                    フォロー済み
+                                </button> @else
                                 <input type="hidden" name="isFollow" value="1" />
                                 <button class="button-black">
-                                        フォロー
-                                    </button> @endif
+                                    フォロー
+                                </button> @endif
                             </form>
                         </div>
                         @endif
@@ -59,6 +59,9 @@
             </div>
             <div class="post-list">
                 <div class="title">投稿一覧</div>
+                @if ($posts -> content == 0)
+                <div crass="new">何か投稿してみませんか？</div>
+                @endif
                 @foreach ($posts as $post)
                 <a href="/post/detail/{{ $post->id }}">
                     <div class="post">
@@ -92,71 +95,71 @@
     .user-page .page-container {
         padding: 0 10px;
     }
-    
+
     .user-page .user-info .user-icon {
         width: 60px;
         height: 60px;
     }
-    
+
     .user-page .user-info {
         margin-bottom: 10px;
     }
-    
+
     .user-page .user-row {
         display: flex;
         justify-content: space-between;
         line-height: 60px;
     }
-    
+
     .user-page .user-info .user-name {
         font-size: 20px;
         font-weight: bold;
     }
-    
+
     .user-page .biography {
         font-size: 14px;
         padding: 8px 0;
     }
-    
+
     .user-page .follow-info {
         display: flex;
         font-size: 14px;
     }
-    
+
     .user-page .follow-info .follow {
         margin-right: 5px;
     }
-    
+
     .user-page .title {
         font-size: 18px;
         font-weight: bold;
         color: gray;
         margin-bottom: 6px;
     }
-    
+
     .user-page .post {
         display: flex;
         padding: 0 10px;
     }
-    
+
     .user-page .post .container {
         width: 90%;
     }
-    
+
     .user-page .post-list .user-icon {
         width: 40px;
         height: 40px;
     }
-    
+
     .user-page .user-name {
         line-height: 40px;
     }
-    
+
     .user-page .content {
         font-size: 14px;
         word-wrap: break-word;
     }
-    
+
     .user-page .time-stamp {
         font-size: 8px;
         text-align: end;
